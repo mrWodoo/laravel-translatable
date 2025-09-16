@@ -9,7 +9,6 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Spatie\Translatable\Events\TranslationHasBeenSetEvent;
 use Spatie\Translatable\Exceptions\AttributeIsNotTranslatable;
-use Spatie\Translatable\Facades\Translatable;
 
 trait HasTranslations
 {
@@ -84,7 +83,7 @@ trait HasTranslations
 
         $baseKey = Str::before($key, '->'); // get base key in case it is JSON nested key
 
-        $translatableConfig = app('translatable');
+        $translatableConfig = app(Translatable::class);
 
         if (is_null(self::getAttributeFromArray($baseKey))) {
             $translation = null;
@@ -131,7 +130,7 @@ trait HasTranslations
     {
         if ($key !== null) {
             $this->guardAgainstNonTranslatableAttribute($key);
-            $translatableConfig = app('translatable');
+            $translatableConfig = app(Translatable::class);
 
             if ($this->isNestedKey($key)) {
                 [$key, $nestedKey] = explode('.',str_replace('->', '.', $key), 2);
@@ -183,7 +182,7 @@ trait HasTranslations
             $this->attributes[$key] = json_encode($translations, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
         }
 
-        $translatableConfig = app('translatable');
+        $translatableConfig = app(Translatable::class);
         if ($translatableConfig->allowEvent) {
             event(new TranslationHasBeenSetEvent($this, $key, $locale, $oldValue, $value));
         }
@@ -300,7 +299,7 @@ trait HasTranslations
             $fallbackLocale = $this->getFallbackLocale();
         }
 
-        $fallbackConfig = app('translatable');
+        $fallbackConfig = app(Translatable::class);
 
         $fallbackLocale ??= $fallbackConfig->fallbackLocale ?? config('app.fallback_locale');
 

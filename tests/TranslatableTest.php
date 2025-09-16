@@ -17,7 +17,7 @@ beforeEach(function () {
 
 it('will not dispatch TranslationHasBeenSetEvent when setting a translation', function () {
     Event::fake();
-    config()->set('app.dispatch_event', false);
+    Translatable::allowEvent(false);
 
     $this->testModel->setTranslation('name', 'en', 'testValue_en');
     $this->testModel->save();
@@ -28,7 +28,7 @@ it('will not dispatch TranslationHasBeenSetEvent when setting a translation', fu
 
 it('will dispatch TranslationHasBeenSetEvent when setting a translation', function () {
     Event::fake();
-    config()->set('app.dispatch_event', true);
+    Translatable::allowEvent(true);
 
     $this->testModel->setTranslation('name', 'en', 'testValue_en');
     $this->testModel->save();

@@ -11,7 +11,7 @@ All notable changes to `laravel-translatable` will be documented in this file
 ### What's Changed
 
 * Allow null value in translations if allowNullForTranslation is true by @dont-know-php in https://github.com/spatie/laravel-translatable/pull/488
-* Add config check for TranslationHasBeenSetEvent dispatch by @assistant
+* Add config check for TranslationHasBeenSetEvent dispatch by @mrWodoo
 * Fix test to properly use Event::fake() before asserting event dispatch
 * Add test case to verify event is dispatched when config is true
 

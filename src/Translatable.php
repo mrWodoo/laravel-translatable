@@ -23,6 +23,8 @@ class Translatable
 
     public bool $allowEmptyStringForTranslation = false;
 
+    public bool $allowEvent = true;
+
     public function fallback(
         ?string $fallbackLocale = null,
         ?bool $fallbackAny = false,
@@ -45,6 +47,13 @@ class Translatable
     public function allowEmptyStringForTranslation(bool $allowEmptyStringForTranslation = true): self
     {
         $this->allowEmptyStringForTranslation = $allowEmptyStringForTranslation;
+
+        return $this;
+    }
+
+    public function allowEvent(bool $allowEvent = true): self
+    {
+        $this->allowEvent = $allowEvent;
 
         return $this;
     }

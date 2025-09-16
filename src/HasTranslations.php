@@ -182,7 +182,9 @@ trait HasTranslations
             $this->attributes[$key] = json_encode($translations, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
         }
 
-        event(new TranslationHasBeenSetEvent($this, $key, $locale, $oldValue, $value));
+        if (config('app.dispatch_event', true)) {
+            event(new TranslationHasBeenSetEvent($this, $key, $locale, $oldValue, $value));
+        }
 
         return $this;
     }
